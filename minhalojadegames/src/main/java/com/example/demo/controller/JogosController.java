@@ -15,30 +15,30 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.model.Categoria;
-import com.example.demo.repository.CategoriaRepository;
+import com.example.demo.model.Jogos;
+import com.example.demo.repository.JogosRepository;
 
 @RestController
-@RequestMapping("/categoria")
+@RequestMapping("/produtos")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-public class CategoriaController {
+public class JogosController {
 	@Autowired
-	private CategoriaRepository repository;
+	private JogosRepository repository;
 	
 	@GetMapping
-	public ResponseEntity<List<Categoria>> GetAll(){
+	public ResponseEntity<List<Jogos>> GetAll(){
 		return ResponseEntity.ok(repository.findAll());
 	}
 	
 	@PostMapping
-	public ResponseEntity<Categoria> post (@RequestBody Categoria categoria){
+	public ResponseEntity<Jogos> post (@RequestBody Jogos jogos){
 		return ResponseEntity.status(HttpStatus.CREATED)
-				.body(repository.save(categoria));
+				.body(repository.save(jogos));
 	}
 	
 	@PutMapping
-	public ResponseEntity<Categoria> put (@RequestBody Categoria categoria){
-		return ResponseEntity.ok(repository.save(categoria));
+	public ResponseEntity<Jogos> put (@RequestBody Jogos jogos){
+		return ResponseEntity.ok(repository.save(jogos));
 	}
 	
 	@DeleteMapping("/{id}")
@@ -46,8 +46,8 @@ public class CategoriaController {
 		repository.deleteById(id);
 	}
 	
-	@GetMapping("/descricao/{descricao}")
-	public ResponseEntity<List<Categoria>> getByDescription(@PathVariable String descricao){
-		return ResponseEntity.ok(repository.findAllByDescricaoContainingIgnoreCase(descricao));
+	@GetMapping("/nome/{nome}")
+	public ResponseEntity<List<Jogos>> getByName(@PathVariable String nome){
+		return ResponseEntity.ok(repository.findAllByNomeContainingIgnoreCase(nome));
 	}
 }

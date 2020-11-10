@@ -34,7 +34,7 @@ public class Categoria {
 	private String descricao;
 	
 	@OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
-	@JsonIgnoreProperties("jogos")
+	@JsonIgnoreProperties("categoria")
 	private List<Jogos> jogos;
 	
 	//Getters and Setters
